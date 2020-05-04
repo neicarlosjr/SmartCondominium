@@ -1,0 +1,35 @@
+﻿
+@{
+    Layout = null;
+}
+@model Espelhos_Thor.Models.StatusPedido
+<div class="form-group">
+    <table class="table-form">
+        <tr>
+            <td>@Html.LabelFor(s => s.Codigo, "Codigo")</td>
+            <td>@Html.TextBoxFor(s => s.Codigo, new { @class = "form-control", size = "1", @required = "required", @maxlength = "1" })</td>
+            <td>@Html.LabelFor(s => s.Descricao, "Descrição")</td>
+            <td>@Html.TextBoxFor(s => s.Descricao, new { @class = "form-control", size = "30", @required = "required" })</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(s => s.CaminhoFoto, "Legenda")</td>
+            <td>
+                <select name="CaminhoFoto" class="form-control" required>
+                <option disabled="disabled" selected="selected">Cor</option> 
+                <option value="Azul.png">Azul</option>
+                <option value="Amarelo.png">Amarelo</option>
+                <option value="AzulEscuro.png">Azul Escuro</option>
+                <option value="Cinza.png">Cinza</option>
+                <option value="Laranja.png">Laranja</option>
+                <option value="Marron.png">Marron</option>
+                <option value="Preto.png">Preto</option>
+                <option value="Rosa.png">Rosa</option>
+                <option value="verde.png">Verde</option>
+                <option value="verdeClaro.png">Verde Claro</option>
+                <option value="vermelho">vermelho.png</option>
+                <option value="vermelho">vermelho.png</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+</div>

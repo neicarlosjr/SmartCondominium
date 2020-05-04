@@ -1,0 +1,57 @@
+﻿@model Espelhos_Thor.Models.Pedido
+<div class="form-group">
+    <table class="table-form">
+        <tr>
+            <td align="center">@Html.LabelFor(p => p.NumeroThor, "Numero Thor")</td>
+            <td>@Html.TextBoxFor(p => p.NumeroThor, new { @class = "form-control", size = "10", @required = "required", @readonly = "readonly" })</td>
+            <td align="center">@Html.LabelFor(p => p.Sequencia, "Sequencia")</td>
+            <td>@Html.TextBoxFor(p => p.Sequencia, new { @class = "form-control", size = "02", @readonly = "readonly" })</td>
+            <td align="center">@Html.LabelFor(p => p.TipoAcab, "Tipo de Acabamento")</td>
+            <td>@Html.TextBoxFor(p => p.TipoAcab, new { @class = "form-control", size = "02", @readonly = "readonly" })</td>
+            <td align="center">@Html.LabelFor(p => p.OrdemPrioridade, "Prioridade")</td>
+            <td>@Html.TextBoxFor(p => p.OrdemPrioridade, new { @class = "form-control", size = "4", @readonly = "readonly" })</td>
+        </tr>
+        <tr>
+            <td align="center">@Html.LabelFor(p => p.DataPedido, "Data do Pedido")</td>
+            <td><input type="date" name="DataPedido" class="form-control" value="@ViewBag.dtped" readonly="readonly" /></td>
+            <td align="center">@Html.LabelFor(p => p.Serraria, "Serraria")</td>
+            <td>@Html.TextBoxFor(p => p.Serraria, new { @class = "form-control", size = "20", @required = "required", @readonly = "readonly" })</td>
+            <td align="center">@Html.LabelFor(p => p.Vendedor, "Vendedor")</td>
+            <td>@Html.TextBoxFor(p => p.Vendedor, new { @class = "form-control", size = "20", @required = "required", @readonly = "readonly" })</td>
+            <td align="center">@Html.LabelFor(p => p.PO, "PO")</td>
+            <td>@Html.TextBoxFor(p => p.PO, new { @class = "form-control", @readonly = "readonly" })</td>
+        </tr>
+        <tr>
+            <td align="center">@Html.LabelFor(p => p.Cliente)</td>
+            <td>@Html.TextBoxFor(p => p.Cliente, new { @class = "form-control", maxlenght = "35", @readonly = "readonly" })</td>
+            <td align="center">@Html.LabelFor(p => p.Material, "Material")</td>
+            <td>@Html.TextBoxFor(p => p.Material, new { @class = "form-control", maxlenght = "35", @readonly = "readonly" })</td>
+            <td align="center">@Html.LabelFor(p => p.Eng2Cm, "Eng 2 cm")</td>
+            <td>@Html.TextBoxFor(p => p.Eng2Cm, new { @class = "form-control", maxlenght = "02", @readonly = "readonly" })</td>
+            <td align="center">@Html.LabelFor(p => p.Eng3Cm, "Eng 3 cm")</td>
+            <td>@Html.TextBoxFor(p => p.Eng3Cm, new { @class = "form-control", maxlenght = "02", @readonly = "readonly" })</td>
+        </tr>
+        <tr>
+            <td align="center">@Html.LabelFor(p => p.Preco2Cm, "Preço 2cm")</td>
+            <td>@Html.TextBoxFor(p => p.Preco2Cm, new { @class = "form-control", @readonly = "readonly" })</td>
+            <td align="center">@Html.LabelFor(p => p.Preco3Cm, "Preço 3cm")</td>
+            <td>@Html.TextBoxFor(p => p.Preco3Cm, new { @class = "form-control", @readonly = "readonly" })</td>
+            <td align="center">@Html.LabelFor(p => p.Classificacao, "Classificação")</td>
+            <td>@Html.TextBoxFor(p => p.Classificacao, new { @class = "form-control", maxlenght = "12", @readonly = "readonly" })</td>
+            <td align="center">@Html.LabelFor(p => p.DataOvacao, "Data de Ovaçao")</td>
+            <td><input type="date" name="DataEmbarque" class="form-control" value="@ViewBag.dtemb" readonly="readonly" /></td>
+        </tr>
+        <tr>
+            <td align="center">@Html.LabelFor(p => p.Destino, "Destino")</td>
+            <td>@Html.TextBoxFor(p => p.Destino, new { @class = "form-control", maxlenght = "20", @readonly = "readonly" })</td>
+            <td align="center">@Html.LabelFor(p => p.DtEnvCtnAprovacao, "D. Envio p/ Aprov")</td>
+            <td><input type="date" name="DataEmbarque" class="form-control" value="@ViewBag.ctnaprov" readonly="readonly" /></td>
+            <td align="center">@Html.LabelFor(p => p.NumCtnEngs, "Num CTN")</td>
+            <td>@Html.TextBoxFor(p => p.NumCtnEngs, new { @class = "form-control", size = "20", @readonly = "readonly" })</td>
+        </tr>
+        <tr>
+            <td align="center">@Html.LabelFor(p => p.ObsMaterial, "Obs do Material")</td>
+            <td>@Html.TextAreaFor(p => p.ObsMaterial, new { @class = "form-control", cols = "50", rows = "5", @readonly = "readonly" })</td>
+        </tr>
+    </table>
+</div>

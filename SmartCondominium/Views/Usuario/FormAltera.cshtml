@@ -1,0 +1,90 @@
+﻿@model Espelhos_Thor.Models.Usuario
+@using (Html.BeginForm("Altera", "Usuario", FormMethod.Post, new { @class = "form-inline", enctype = "multipart/form-data" }))
+{   @Html.HiddenFor(u => u.Password)
+    @Html.HiddenFor(u => u.Id);
+    @Html.HiddenFor(u => u.CaminhoFoto)
+    @Html.HiddenFor(u => u.Foto);
+    <div class="panel panel-primary">
+        <div class="panel-heading"><h4>Cadastro de Usuário</h4></div>
+        <div class="panel-body">
+            <div class="form-group">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="img-thumbnail">
+                                @{
+                                    if (ViewBag.usuario.CaminhoFoto == null)
+                                    {
+                                        <img src="~/Content/img/perfil.jpg" height="200" width="200" class="img-rounded profile_img">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Uploads/Usuarios/@ViewBag.usuario.CaminhoFoto" height="200" width="200" class="img-rounded profile_img">
+                                    }
+                                }
+
+                            </div>
+                        </td>
+                        <td>
+                            <table class="table-form">
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(u => u.Nome, "Nome:")
+                                        @Html.TextBoxFor(u => u.Nome, new { @class = "form-control", size = "50", @required = "required" })
+                                    </td>
+                                    <td>
+                                        @Html.LabelFor(u => u.Login, "Login:")
+                                        @Html.TextBoxFor(u => u.Login, new { @class = "form-control", @readonly = "readonly" })
+                                    </td>
+                                  
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(u => u.Perfil, "Perfil:")
+                                        @Html.TextBoxFor(u => u.Perfil, new { @class = "form-control", type = "file", accept = ".jpg,.jpeg,.png" })
+                                    </td>
+                                    <td>
+                                        @Html.LabelFor(u => u.Email, "Email:")
+                                        @Html.TextBoxFor(u => u.Email, new { @class = "form-control", size = "50", @required = "required" })
+                                    </td>
+                                  </tr>
+                                <tr>
+                                <tr>
+                                    <td>@Html.LabelFor(u => u.CodVendedor, "Vendedor")
+                                        @Html.DropDownListFor(u => u.CodVendedor, new SelectList(ViewBag.vendedor, "Cod", "Nome"), "Vendedor", new { @class = "form-control" }) </td>
+                                </tr>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(u => u.Adm, "Admin:")
+                                        @Html.CheckBoxFor(u => u.Adm, new { @class = "form-control" })
+                                    </td>
+                                    <td>
+                                        @Html.LabelFor(u => u.Edita, "Edita:")
+                                        @Html.CheckBoxFor(u => u.Edita, new { @class = "form-control" })
+
+                                    </td>
+                                    <td>
+                                        @Html.LabelFor(u => u.Pcp, "PCP:")
+                                        @Html.CheckBoxFor(u => u.Pcp, new { @class = "form-control" })
+
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+        <div class="panel-footer info">
+            <input type="submit" class="btn btn-info" value="Confirmar" />
+            @Html.ActionLink("Cancelar", "Index", "Espelhos", new { @class = "btn btn-default" })
+        </div>
+    </div>
+
+
+
+                                    }

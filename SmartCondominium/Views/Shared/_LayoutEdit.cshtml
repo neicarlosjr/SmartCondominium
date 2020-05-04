@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="~/Content/bootstrap/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap/css/bootstrap-theme.css" />
+    <link rel="stylesheet" href="~/Content/css/estilo.css" />
+    <script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+
+    <link type="text/css" href="~/Scripts/auto_complete/myui/main.css" rel="stylesheet">
+    <link type="text/css" href="~/Scripts/auto_complete/myui/myui.css" rel="stylesheet">
+    <script type="text/javascript" src="~/Scripts/auto_complete/prototype/1.6.1/prototype.js"></script>
+    <script type="text/javascript" src="~/Scripts/auto_complete/scriptaculous/scriptaculous.js"></script>
+    <script type="text/javascript" src="~/Scripts/auto_complete/myui/myui.js"></script>
+
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+
+    @RenderBody()
+
+    <footer>
+        <!--Copyright - NCJ/MAP-->
+    </footer>
+    @RenderSection("Scripts", false)
+    <script type="text/javascript" src="~/Scripts/funcoes.js"></script>
+    
+    
+    
+    <script language="Javascript">
+        var ListaCliente = [
+                 @foreach (var cliente in ViewBag.lstCliente)
+                    {
+                        Output.Write("'");
+                        @cliente[0];
+                        Output.Write("',");
+                    }
+        ];
+        var ListaVend = [
+                @foreach (var cliente in ViewBag.lstCliente)
+        {
+            Output.Write("'");
+            @cliente[1];
+            Output.Write("',");
+        }
+        ];
+
+        var ListaCodVend = [
+                @foreach (var cliente in ViewBag.lstCliente)
+        {
+            Output.Write("'");
+            @cliente[2];
+            Output.Write("',");
+        }
+        ];
+
+        var comboBox = null;
+        Event.observe(document, 'dom:loaded', function () {
+            comboBox = new MY.ComboBox({
+                input: 'CLIENTE',
+                items: ListaCliente
+
+            });
+        });
+        function gatilhoVend() {
+            var nPos = ListaCliente.indexOf(frmBrw.CLIENTE.value);
+
+            if (nPos > 0)
+            {
+                frmBrw.Vendedor.value = ListaVend[nPos];
+                frmBrw.CodVendedor.value = ListaCodVend[nPos];
+            }
+        }
+    </script>
+
+</body>
+</html>

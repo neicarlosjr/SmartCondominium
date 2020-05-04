@@ -1,0 +1,51 @@
+﻿@model Espelhos_Thor.Models.Usuario
+@using (Html.BeginForm("Exclui", "Usuario", FormMethod.Post, new { name = "frmEspelhosEdit", @class = "form-inline" }))
+
+    {
+    @Html.HiddenFor(u => u.Id);
+<div class="panel panel-primary">
+    <div class="panel-heading"><h4>Excluindo de Usuário</h4></div>
+    <div class="panel-body">
+        <div class="form-group">
+            <h4>Confirma a exclusão do usuário?</h4>
+            <table class="table-form">
+                <tr>
+                    <td>
+                        @Html.LabelFor(u => u.Nome, "Nome:")
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(u => u.Nome, new { @class = "form-control", size = "50", @readonly = "readonly" })
+                    </td>
+                    <td>
+                        @Html.LabelFor(u => u.Login, "Login:")
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(u => u.Login, new { @class = "form-control", @readonly = "readonly" })
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(u => u.Email, "Email:")
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(u => u.Email, new { @class = "form-control", size = "50", @readonly = "readonly" })
+                    </td>
+                    <td>@Html.HiddenFor(u => u.Password, "Senha:")</td>
+                    <td>@Html.HiddenFor(u => u.Password, new { @class = "form-control", @readonly = "readonly" })</td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+    <div class="panel-footer info">
+        <input type="submit" class="btn btn-danger" value="Confirmar" />
+        @Html.ActionLink("Sair", "Index", "Usuario", new { @class = "btn btn-info" })
+    </div>
+</div>
+}
+
+
+
+

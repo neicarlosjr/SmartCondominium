@@ -1,0 +1,140 @@
+﻿<!--Usuario-->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="~/Content/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/css/estilo.css" />
+    <script src="~/Content/bootstrap/js/jquery-3.0.0.min.js"></script>
+    <script src="~/Content/bootstrap/js/bootstrap.js"></script>
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="~/Content/css/dashboard.css" />
+    <script>var nIndex = 0;</script>
+    <script src="~/Scripts/funcoes.js"></script>
+    <title>Pedidos</title>
+</head>
+@model Espelhos_Thor.Models.Usuario
+<body data-spy="scroll" data-target="#navbar-example">
+    <nav class="navbar navbar-inverse navbar-fixed-top " style="color: #fff;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="pull-left">
+                    @{
+                        if (Session["FotoPerfil"] == null)
+                        {
+                            <a href="~/Usuario/FotoPerfil?login=@Session["login"]">
+                                <img src="~/Content/img/perfil.jpg" height="52" width="52" class="img-circle profile_img">
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="~/Usuario/FotoPerfil?login=@Session["login"]">
+                                <img src="~/Uploads/Usuarios/@Session["FotoPerfil"]" height="52" width="52" class="img-circle profile_img">
+                            </a>
+                        }
+                    }
+                </div>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand active" href="#">@Session["nome"].ToString()</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="~/Espelhos/Index"><strong>Espelhos</strong></a> </li>
+                        <li><a href="~/Pedido/Index">Pedidos</a></li>
+                        <li>@Html.ActionLink("Sair", "Logout", "Home", new { @class = "btn-primary dropdown-toggle" })</li>
+                    </ul>
+                </ul>
+
+            </div>
+        </div>
+    </nav>   <!--Fim da Barra de Menu superior-->
+    @using (Html.BeginForm("Evento", "Usuario", FormMethod.Post, new { name = "frmBrw", @class = "form-inline" }))
+    {
+        <div class="col-sm-3 col-md-2 sidebar">
+            <!--Menu Lateral-->
+            <center><h4><Strong>Pedidos</Strong></h4></center>
+            <ul class="nav nav-sidebar">
+                <li role="presentation"><input type="submit" class="btn btn-primary  btn-group-justified btn-sm" value="Visualizar" onclick="MudaEvento('Visualizar');" /></li>
+                <li role="presentation"><input type="submit" class="btn btn-primary  btn-group-justified btn-sm" value="Incluir" onclick="MudaEvento('Incluir');" /></li>
+                <li role="presentation"><input type="submit" class="btn btn-primary  btn-group-justified btn-sm" value="Alterar" onclick="MudaEvento('Alterar');" /></li>
+                <li role="presentation"><input type="submit" class="btn btn-primary  btn-group-justified btn-sm" value="Excluir" onclick="MudaEvento('Excluir');" /></li>
+                <li role="presentation"><input type="submit" class="btn btn-primary  btn-group-justified btn-sm" value="Trocar Senha" onclick="MudaEvento('TrocaSenha');" /></li>
+               
+           </ul>
+            <div class="nav nav-sidebar">
+
+
+            </div>
+        </div><!--Fim menu lateral-->
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main ">
+            <input type="hidden" name="evento" value="Incluir" />
+
+            <div class="table table-responsive">
+                <table class="table ">
+                    <thead>
+                    <th>   </th>
+                    <th>Nome</th>
+                    <th>Login</th>
+                    <th>Email</th>
+                    <th>Edita</th>
+                    </thead>
+                    <tbody>
+                        @{
+                            var nIndex = 0;
+                            foreach (var u in ViewBag.usuarios)
+                            {
+                                <tr onclick='document.forms["frmBrw"].elements["Id"][@nIndex].checked=true;'>
+                                    <td>
+                                        <input type='radio' name='Id' value='@u.Id' />
+                                    </td>
+                                    <td>@u.Nome</td>
+                                    <td>@u.Login</td>
+                                    <td>@u.Email</td>
+                                    <td>@(u.Edita ? "Sim" : "Nao")</td>
+                                </tr>
+                                nIndex++;
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+}
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <center><h4 class="modal-title" id="exampleModalLabel"><strong>Alterar Senha</strong></h4></center>
+                </div>
+                @using (Html.BeginForm("TrocarSenha", "Usuario", FormMethod.Post, new { @class = "form-inline", name = "frmEmbarcado" }))
+                {
+                    <center>
+                        <div class="modal-body">
+                            <label>Data de : </label><br /><input type="date" name="De" required="required" class="form-control"><br />
+                            <label>Data ate: </label><br /><input type="date" onblur="checarDatas();" name="Ate" required="required" class="form-control">
+                        </div>
+                    </center>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" onsubmit="checarDatas();" class="btn btn-success">Confirmar</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

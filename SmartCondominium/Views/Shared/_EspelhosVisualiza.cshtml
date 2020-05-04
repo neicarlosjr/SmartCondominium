@@ -1,0 +1,45 @@
+﻿@model Espelhos_Thor.Models.Espelhos
+<div class="form-group">
+    <table class="table-form">
+        <tr>
+            <td>@Html.LabelFor(p => p.EMPRESA_GRP, "Empresa:")</td>
+            <td>@Html.TextBoxFor(p => p.EMPRESA_GRP, new { @class = "form-control", @readonly = "readonly" })</td>
+            <td>@Html.LabelFor(p => p.EMPRESA_FAT, "Empresa Fat:")</td>
+            <td>@Html.TextBoxFor(p => p.EMPRESA_FAT, new { @class = "form-control", @readonly = "readonly" })</td>
+            <td>@Html.LabelFor(p => p.NUM_PROCESSO, "N° Processo:")</td>
+            <td>@Html.TextBoxFor(p => p.NUM_PROCESSO, new { @class = "form-control", @readonly = "readonly" })</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(p => p.NUM_ESPELHO, "Espelho:")</td>
+            <td>@Html.TextBoxFor(p => p.NUM_ESPELHO, new { @class = "form-control", @readonly = "readonly" })</td>
+            <td>@Html.LabelFor(p => p.NOME_VEND, "Vendedor:")</td>
+            <td>@Html.TextBoxFor(p => p.NOME_VEND, new { @class = "form-control", @readonly = "readonly" })</td>
+            <td>@Html.LabelFor(p => p.DATA_RECEBIMENTO, "Dt.Recebimento:")</td>
+            <td>@Html.TextBoxFor(p => p.DATA_RECEBIMENTO, new { @class = "form-control", @readonly = "readonly", type = "text" })</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(p => p.CLIENTE, "Cliente:")</td>
+            <td>@Html.TextBoxFor(p => p.CLIENTE, new { @class = "form-control", @readonly = "readonly" })</td>
+            <td>@Html.LabelFor(p => p.PO, "PO:") </td>
+            <td>@Html.TextBoxFor(p => p.PO, new { @class = "form-control", @readonly = "readonly" })</td>
+            <td>@Html.LabelFor(p => p.DESTINO, "Destino:")</td>
+            <td>@Html.TextBoxFor(p => p.DESTINO, new { @class = "form-control", @readonly = "readonly" })</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(p => p.NUM_CTR_PCP, "N° CTR/PCP:")</td>
+            <td>@Html.TextBoxFor(p => p.NUM_CTR_PCP, new { @class = "form-control", @readonly = "readonly" })</td>
+            <td>@Html.LabelFor(p => p.STATUS, "Status:")</td>
+            <td>@Html.TextBoxFor(p => p.STATUS, new { @class = "form-control", @readonly = "readonly" })</td>
+            <td>@Html.LabelFor(p => p.DATA_OVACAO, "Dt.Ovação:")</td>
+            <td>@Html.TextBoxFor(p => p.DATA_OVACAO, new { @class = "form-control", @readonly = "readonly", type = "text" })</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(p => p.OBS_EXPORTACAO, "Obs. Exportação:")</td>
+            <td>@Html.TextBoxFor(p => p.OBS_EXPORTACAO, new { @class = "form-control", @readonly = "readonly" })</td>
+            <td>@Html.LabelFor(p => p.OBS_FINANCEIRO, "Obs. Financeiro:")</td>
+            <td>@Html.TextBoxFor(p => p.OBS_FINANCEIRO, new { @class = "form-control", @readonly = "readonly" })</td>
+            <td>@Html.LabelFor(p => p.UCC, "UCC")</td>
+            <td>@Html.TextBoxFor(p => p.UCC, new { @class = "form-control", @readonly = "readonly" })</td>
+        </tr>
+    </table>
+</div>

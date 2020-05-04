@@ -1,0 +1,60 @@
+﻿@model Espelhos_Thor.Models.Espelhos
+
+<div class="form-group">
+    <table class="table-form">
+        <tr>
+            <td>@Html.LabelFor(p => p.EMPRESA_FAT, "Empresa:") </td>
+            <td>@Html.DropDownListFor(p => p.EMPRESA_FAT, new SelectList(ViewBag.empresa, "Nome", "Nome"), "Escolha a Empresa", new { @class = "form-control", @required = "required" }) </td>
+            <td>@Html.LabelFor(p => p.NOME_VEND, "Vendedor:")</td>
+            <td>
+               <select name="NOME_VEND" id="NOME_VEND" class="form-control">
+                <option value="@Model.NOME_VEND" selected>@Model.NOME_VEND</option>
+                @{
+                    foreach (var s in ViewBag.vendedor)
+                    {
+                        <option value="@s.Nome">@s.Nome</option>
+                    }
+
+                }
+            </select>
+            </td>
+            <td>@Html.LabelFor(p => p.DATA_RECEBIMENTO, "Dt.Inclusão:")</td>
+            <td><input type="date" name="DATA_RECEBIMENTO" class="form-control" value="@ViewBag.dt_rec" /></td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(p => p.NUM_ESPELHO, "Espelho:")</td>
+            <td>@Html.TextBoxFor(p => p.NUM_ESPELHO, new { @class = "form-control", maxlength = "15" })</td>
+            <td>@Html.LabelFor(p => p.NUM_PROCESSO, "N° Processo:")</td>
+            <td>@Html.TextBoxFor(p => p.NUM_PROCESSO, new { @class = "form-control", maxlength = "15" })</td>
+            <td>@Html.LabelFor(p => p.DESTINO, "Destino:")</td>
+            <td>@Html.TextBoxFor(p => p.DESTINO, new { @class = "form-control", maxlength = "30" })</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(p => p.CLIENTE, "Cliente:")</td>
+            <td><input type="text" id="CLIENTE" size="40" name="CLIENTE" required value="@ViewBag.cliente" class="form-control"></td>
+            <td>@Html.LabelFor(p => p.PO, "PO:")</td>
+            <td>@Html.TextBoxFor(p => p.PO, new { @class = "form-control", maxlength = "50" })</td>
+            <td>@Html.LabelFor(p => p.DATA_OVACAO, "Dt.Ovação:")</td>
+            <td><input type="date" name="DATA_OVACAO" class="form-control" value="@ViewBag.dt_ova" /></td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(p => p.NUM_CTR_PCP, "N° CTR/PCP:")</td>
+            <td>@Html.TextBoxFor(p => p.NUM_CTR_PCP, new { @class = "form-control", maxlength = "15" })</td>
+            <td>@Html.LabelFor(p => p.STATUS, "Status:")</td>
+            <td>
+                <select id="status" name="status" class="form-control">
+                    <option value="A" selected>Aguardando</option>
+                    <option value="L">Logistica</option>
+                </select>
+            </td>
+            <td>@Html.LabelFor(p => p.UCC, "UCC")</td>
+            <td>@Html.TextBoxFor(p => p.UCC, new { @class = "form-control", maxlength = "10" })</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(p => p.OBS_EXPORTACAO, "Obs. Exportação:")</td>
+            <td>@Html.TextBoxFor(p => p.OBS_EXPORTACAO, new { @class = "form-control", maxlength = "100" })</td>
+            <td>@Html.LabelFor(p => p.OBS_FINANCEIRO, "Obs. Financeiro:")</td>
+            <td>@Html.TextBoxFor(p => p.OBS_FINANCEIRO, new { @class = "form-control", maxlength = "100" })</td>
+        </tr>
+    </table>
+</div>

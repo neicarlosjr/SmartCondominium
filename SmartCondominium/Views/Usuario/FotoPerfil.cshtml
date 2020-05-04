@@ -1,0 +1,63 @@
+﻿@model Espelhos_Thor.Models.Usuario
+@using (Html.BeginForm("TrocaFoto", "Usuario", FormMethod.Post, new { @class = "form-inline", enctype = "multipart/form-data" }))
+{
+    <nav class="navbar navbar-inverse navbar-fixed-top " style="color: #fff;">
+    </nav>
+        <div class="panel-heading"><h4>@Session["login"]</h4></div>
+        <div class="panel-body">
+            <div class="form-group">
+                @Html.HiddenFor(u => u.Id)
+                @Html.HiddenFor(u => u.Adm)
+                @Html.HiddenFor(u => u.Edita)
+                @Html.HiddenFor(u => u.Password)
+                @Html.HiddenFor(u => u.Email)
+                @Html.HiddenFor(u => u.Nome)
+                @Html.HiddenFor(u => u.Login)
+                @Html.HiddenFor(u => u.Foto)
+                @Html.HiddenFor(u => u.Perfil)
+                @Html.HiddenFor(u => u.CaminhoFoto)
+                @Html.HiddenFor(u => u.CodVendedor)
+                <table>
+                    <tr>
+
+                        <td>
+                            @Html.LabelFor(u => u.Login, "Login:")
+                            @Session["login"]
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="img-thumbnail">
+                                @{
+                                    if (ViewBag.usuario.CaminhoFoto == null)
+                                    {
+                                        <img src="~/Content/img/perfil.jpg" height="200" width="200" class="img-rounded profile_img">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Uploads/Usuarios/@ViewBag.usuario.CaminhoFoto" height="200" width="200" class="img-rounded profile_img">
+                                    }
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            <table class="table-form">
+
+                                <tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                             @Html.TextBoxFor(u => u.Perfil, new { @class = "form-control", type = "file", accept = ".jpg,.jpeg,.png" })
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="panel-footer info">
+            <input type="submit" class="btn btn-info" value="Alterar" />
+            @Html.ActionLink("Sair", "Index", "Usuario", new { @class = "btn btn-danger" })
+        </div>
+   
+                                    }                                

@@ -1,0 +1,57 @@
+﻿@model Espelhos_Thor.Models.Pedido
+@Html.HiddenFor(p=>p.CodVendedor)
+<table class="table-form">
+    <tr>
+        <td>@Html.LabelFor(p => p.NumeroThor, "Numero Thor")</td>
+        <td>@Html.TextBoxFor(p => p.NumeroThor, new { @class = "form-control text-uppercase", size = "10", @required = "required", onFocus = "this.select(); " })</td>
+        <td>@Html.LabelFor(p => p.TipoAcab, "Tipo de Acabamento")</td>
+        <td>@Html.TextBoxFor(p => p.TipoAcab, new { @class = "form-control text-uppercase", size = "02" })</td>
+        <td>@Html.LabelFor(p => p.DataPedido, "Data do Pedido")</td>
+        <td><input class="form-control text-uppercase" type="date" name="DataPedido" id="DataPedido" value=@DateTime.Now.ToString("yyyy-MM-dd") /></td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(p => p.Cliente)</td>
+        <td><input type="text" id="CLIENTE" size="40" name="CLIENTE" onblur="gatilhoVend();" value="@ViewBag.cliente" class="form-control text-uppercase"></td>
+        <td>@Html.LabelFor(p => p.Vendedor, "Vendedor")</td>
+        <td>@Html.TextBoxFor(p => p.Vendedor, new { @class = "form-control text-uppercase", @readonly = "readonly", value="@Viewbag.vendedor", @id = "Vendedor", @nome = "Vendedor" })</td>
+        <td>@Html.LabelFor(p => p.PO, "PO")</td>
+        <td>@Html.TextBoxFor(p => p.PO, new { @class = "form-control text-uppercase" })</td>
+        
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(p => p.Material, "Material")</td>
+        <td>@Html.TextBoxFor(p => p.Material, new { @class = "form-control text-uppercase", maxlenght = "35" })</td>
+        <td>@Html.LabelFor(p => p.Espessura, "Espessura")</td>
+        <td><select name="Espessura" class="form-control text-uppercase" required>
+                <option value=""> </option>
+                <option value="2CM">2CM</option>
+                <option value="3CM">3CM</option>
+             </select>
+        </td>
+        <td>@Html.LabelFor(p => p.Classificacao, "Classificação")</td>
+        <td>@Html.TextBoxFor(p => p.Classificacao, new { @class = "form-control text-uppercase", maxlenght = "12" })</td>
+        
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(p => p.Quantidade, "Quantidade")</td>
+        <td><input type="number" class="form-control text-uppercase" name="Quantidade" step="0.01" onFocus="this.select();" /></td>
+        <td>@Html.LabelFor(p => p.Preco, "Preço")</td>
+        <td>@Html.TextBoxFor(p => p.Preco, new { @class = "form-control", onFocus = "this.select();" })</td>
+        <td>@Html.LabelFor(p => p.OrdemPrioridade, "Prioridade")</td>
+        <td>@Html.TextBoxFor(p => p.OrdemPrioridade, new { @class = "form-control text-uppercase", size = "04" })</td>
+        
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(p => p.Destino, "Destino")</td>
+        <td>@Html.TextBoxFor(p => p.Destino, new { @class = "form-control text-uppercase", maxlenght = "20" })</td>
+        <td>@Html.LabelFor(p => p.NumCtnEngs, "Num CTN")</td>
+        <td>@Html.TextBoxFor(p => p.NumCtnEngs, new { @class = "form-control text-uppercase", size = "20" })</td>
+        <td>@Html.LabelFor(p => p.DataOvacao, "Data de Ovacao")</td>
+        <td>@Html.TextBoxFor(p => p.DataOvacao, new { @class = "form-control text-uppercase", type = "Date" })</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(p => p.DataPrevEmb, "Dt.Prev.Embarque")</td>
+        <td>@Html.TextBoxFor(p => p.DataPrevEmb, new { @class = "form-control text-uppercase", type = "Date" })</td>        
+    </tr>
+   
+</table>

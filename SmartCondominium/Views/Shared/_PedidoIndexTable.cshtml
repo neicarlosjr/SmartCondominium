@@ -1,0 +1,160 @@
+﻿@model Espelhos_Thor.Models.Pedido
+<table id="navbar-example" class="table table-overflow">
+    <thead>
+    <th></th>
+    <th></th>
+    <th>Numero</th>
+    <th>Data</th>
+    <th>
+        Cliente
+        <select name="Cliente" id="Cliente" onchange="MudaAction(frmBrw, '/Pedido/Filtrar');">
+            @foreach (var n in ViewBag.lstCli)
+            {
+                string selected = (n == Model.Cliente ? "selected" : "");
+
+                <option value="@n" @selected>@n</option>
+            }
+        </select>
+    </th>
+    <th>PO</th>
+    <th>
+        Material
+        <select name="Material" id="Material" onchange="MudaAction(frmBrw, '/Pedido/Filtrar');">
+            @foreach (var n in ViewBag.lstmat)
+            {
+                string selected = (n == Model.Material ? "selected" : "");
+
+                <option value="@n" @selected>@n</option>
+            }
+        </select>
+    </th>
+    <th>Class.</th>
+    <th>Acab</th>
+    <th>
+        Espessura
+        <select name="Espessura" id="Espessura" onchange="MudaAction(frmBrw, '/Pedido/Filtrar');">
+            @foreach (var n in ViewBag.lstEspessura)
+            {
+                string selected = (n == Model.Espessura ? "selected" : "");
+
+                <option value="@n" @selected>@n</option>
+            }
+        </select>
+    </th>
+    <th align="right">Dt.Prev.Embarque</th>
+    <th align="right">Lead Time</th>
+    <th align="right">Quantidade</th>
+    <th align="right">Saldo</th>
+    <th align="right">Preço $</th>
+    <th>Vendedor</th>
+    </thead>
+    <tbody>
+        @{
+            var nIndex = 0;
+            var sDataPrev = "";
+            DateTime datanow = DateTime.Now;
+            DateTime dataPrev = new DateTime();
+            TimeSpan timespan;
+
+
+            foreach (var ped in ViewBag.pedidos)
+            {
+                if (ped.DataPrevEmb.Trim() != "")
+                {
+                    sDataPrev = ped.DataPrevEmb.Substring(6, 2) + "/" + ped.DataPrevEmb.Substring(4, 2) + "/" + ped.DataPrevEmb.Substring(0, 4);
+                    dataPrev = Convert.ToDateTime(sDataPrev);
+                    timespan = dataPrev - datanow;
+                }
+                else
+                {
+                    timespan = datanow - datanow;
+                }
+
+
+                if (ped.DataPedido != " ")
+                {
+                    ped.DataPedido = ped.DataPedido.Substring(6, 2)+ "/"+ ped.DataPedido.Substring(4, 2)+ "/"+ ped.DataPedido.Substring(0, 4);
+                }
+                if (ped.DataOvacao != " ")
+                {
+                    ped.DataOvacao = ped.DataOvacao.Substring(6, 2)+ "/"+ ped.DataOvacao.Substring(4, 2)+ "/"+ ped.DataOvacao.Substring(0, 4);
+                }
+
+                if (ped.DataPrevEmb != " ")
+                {
+                    ped.DataPrevEmb = ped.DataPrevEmb.Substring(6, 2) + "/" + ped.DataPrevEmb.Substring(4, 2) + "/" + ped.DataPrevEmb.Substring(0, 4);
+                }
+
+                <tr onclick='document.forms["frmBrw"].elements["ID"][@nIndex].checked=true;pid=document.frmBrw.ID.value;'>
+                    <td>
+                        @if (ped.Status == "0")
+                        {
+                            <img src="~/Content/img/Legendas/Azul.png" height="18" width="18">}
+                        @if (ped.Status == "1")
+                        {
+                            <img src="~/Content/img/Legendas/Laranja.png" height="18" width="18" />
+                        }
+                        @if (ped.Status == "2")
+                        {
+                            <img src="~/Content/img/Legendas/Rosa.png" height="18" width="18" />
+                        }
+                        @if (ped.Status == "3")
+                        {
+                            <img src="~/Content/img/Legendas/Cinza.png" height="18" width="18" />
+                        }
+                        @if (ped.Status == "4")
+                        {
+                            <img src="~/Content/img/Legendas/Amarelo.png" height="18" width="18" />
+                        }
+                        @if (ped.Status == "5")
+                        {
+                            <img src="~/Content/img/Legendas/verde.png" height="18" width="18" />
+                        }
+                        @if (ped.Status == "6")
+                        {
+                            <img src="~/Content/img/Legendas/vermelho.png" height="18" width="18" />
+                        }
+                        @if (ped.Status == "7")
+                        {
+                            <img src="~/Content/img/Legendas/Meio.png" height="18" width="18" />
+                        }
+                    </td>
+                    <td>
+                        @if (nIndex == 0)
+                        {
+                            <input type='radio' name='ID' value='@ped.Id' checked="checked" />
+                        }
+                        else
+                        {
+                            <input type='radio' name='ID' value='@ped.Id' />
+                        }
+                    </td>
+                    <td>@ped.NumeroThor</td>
+                    <td>@ped.DataPedido</td>
+                    <td>@ped.Cliente</td>
+                    <td>@ped.PO</td>
+                    <td>@ped.Material</td>
+                    <td>@ped.Classificacao</td>
+                    <td>@ped.TipoAcab</td>
+                    <td>@ped.Espessura</td>
+                    <td align="right">@ped.DataPrevEmb</td>
+                    @if (timespan.Days < 0)
+                    {
+                        <td><label class="text text-danger">@timespan.Days</label></td>
+                    }
+                    else
+                    {
+                        <td><label class="text text-primary">@timespan.Days</label></td>
+                    }
+
+
+                    <td align="right">@ped.Quantidade</td>
+                    <td align="right">@ped.Saldo</td>
+                    <td align="right">@ped.Preco.ToString("####,###.00")</td>
+                    <td>@ped.Vendedor</td>
+                </tr>
+                nIndex++;
+            }
+        }
+    </tbody>
+</table>

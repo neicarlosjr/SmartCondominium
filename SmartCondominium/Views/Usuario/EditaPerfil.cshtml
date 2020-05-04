@@ -1,0 +1,55 @@
+﻿@model Espelhos_Thor.Models.Usuario
+@using (Html.BeginForm("Adiciona", "Usuario", FormMethod.Post, new { @class = "form-inline", enctype = "multipart/form-data" }))
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading"><h4>Cadastro de Usuário</h4></div>
+        <div class="panel-body">
+            <div class="form-group">
+                <table class="table-form">
+                    <tr>
+                        <td>
+                            @Html.LabelFor(u => u.Nome, "Nome:")
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(u => u.Nome, new { @class = "form-control", size = "50", @readonly = "readonly" })
+                        </td>
+                        <td>
+                            @Html.LabelFor(u => u.Login, "Login:")
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(u => u.Login, new { @class = "form-control", @readonly = "readonly" })
+                        </td>
+                        <td>@Html.LabelFor(u => u.Perfil, " Perfil:")</td>
+                        <td>@Html.TextBoxFor(u => u.Perfil, new { type = "file", @class = "form-control", accept = ".jpg,.jpeg,.png" })</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.HiddenFor(u => u.Email, new { @class = "form-control", size = "50", @readonly = "readonly" })
+                        </td>
+                         <td>@Html.HiddenFor(u => u.Password, new { @class = "form-control", @readonly = "readonly" })</td>
+
+                    </tr>
+                    <tr>
+                        
+                        <td>@Html.HiddenFor(u => u.Edita)</td>
+                        <td>@Html.HiddenFor(u => u.Adm)</td>
+                        <rd>@Html.HiddenFor(u=>u.CodVendedor)</rd>
+
+                    </tr>
+
+                </table>
+                <div class="alert-danger">
+                    @Html.ValidationMessage("usuario.Invalido")
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer info">
+            <input type="submit" class="btn btn-info" value="Confirmar" />
+            @Html.ActionLink("Cancelar", "Index", "Espelhos", new { @class = "btn btn-danger" })
+        </div>
+    </div>
+
+
+
+}
+

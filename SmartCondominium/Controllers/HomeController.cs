@@ -1,30 +1,42 @@
-﻿using System;
+﻿using SmartCondominium.Dao;
+using SmartCondominium.Filters;
+using SmartCondominium.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace SmartCondominium.Controllers
 {
+
     public class HomeController : Controller
     {
+        //
+        // GET: /Home/
+       // [AutorizacaoFilter]
         public ActionResult Index()
         {
+            
+
+
             return View();
         }
 
-        public ActionResult About()
+              
+
+        
+        public ActionResult Logout()
         {
-            ViewBag.Message = "Your application description page.";
 
-            return View();
+            Session.Abandon();
+            return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+       
 
-            return View();
-        }
+        
+
     }
 }

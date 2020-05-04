@@ -1,0 +1,134 @@
+﻿<head>
+    <link href="~/Content/vendor/metisMenu/metisMenu.min.css" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <link href="~/Content/css/sb-admin-2.css" rel="stylesheet"/>
+    <!-- Morris Charts CSS -->
+    <link  href="~/Content/vendor/morrisjs/morris.css" rel="stylesheet" />
+    <!-- Custom Fonts -->
+    <link href="~/Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    @model Espelhos_Thor.Models.Usuario
+    <div class="panel panel-primary">
+        <div class="panel-heading">Usuário</div>
+        <div class="panel-body">
+            <div class="pesquisa">
+                <label>Localizar:</label>
+                <a style="display: none;" class="action" href="#"></a>
+                <input type="text" name="txtpesq" id="txtpesq" />
+                <input type="button" class="btn btn-info" value="Pesquisar" onclick="LocalizaFat(document.getElementById('txtpesq').value);" />
+                <div class="btn btn-default"> @Html.ActionLink("Sair", "Logout", "Home")</div>
+            </div>
+            @using (Html.BeginForm("Evento", "Usuario", FormMethod.Post, new { name = "frmBrw", @class = "form-inline" }))
+            {
+                <input type="hidden" name="evento" value="Incluir" />
+                <div class="table-responsive table-overflow" width="100%" height="90%">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>   </th>
+                                <th>Nome</th>
+                                <th>Login</th>
+                                <th>Email</th>
+                                <th>Edita</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var nIndex = 0;
+                                foreach (var u in ViewBag.usuarios)
+                                {
+                                    <tr onclick='document.forms["frmBrw"].elements["Id"][@nIndex].checked=true;'>
+                                        <td>
+                                            <input type='radio' name='Id' value='@u.Id' />
+                                        </td>
+                                        <td>@u.Nome</td>
+                                        <td>@u.Login</td>
+                                        <td>@u.Email</td>
+                                        <td>@(u.Edita ? "Sim" : "Nao")</td>
+                                    </tr>
+                                    nIndex++;
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                    <ul class="nav nav-pills">
+                        <li role="presentation"><input type="submit" class="btn btn-info" value="Visualizar" onclick="MudaEvento('Visualizar');" /></li>
+                        <li role="presentation"><input type="submit" class="btn btn-info" value="Incluir" onclick="MudaEvento('Incluir');" /></li>
+                        <li role="presentation"><input type="submit" class="btn btn-info" value="Alterar" onclick="MudaEvento('Alterar');" /></li>
+                        <li role="presentation"><input type="submit" class="btn btn-danger" value="Excluir" onclick="MudaEvento('Excluir');" /></li>
+                        @Html.ValidationMessage("evento.invalido")
+                    </ul>
+                                }
+        </div>
+    </div>
+      <!--Inicio Graficos-->                      
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Area
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <div id="morris-area-chart"></div>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Barra
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <div id="morris-bar-chart"></div>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                   
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Donut
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <div id="morris-donut-chart"></div>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+
+            
+
+                                     <!--Teste CHART.MVC-->
+                    
+                    
+               
+                 
+
+   
+     
+    
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="~/Content/vendor/metisMenu/metisMenu.min.js"></script>
+    <!-- Morris Charts JavaScript -->
+    <script src="~/Content/vendor/raphael/raphael.min.js"></script>
+    <script src="~/Content/vendor/morrisjs/morris.min.js"></script>
+    <script src="~/Content/data/morris-data.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="~/Content/css/sb-admin-2.js"></script>
+
+
+</body>

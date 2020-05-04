@@ -1,0 +1,455 @@
+﻿@model Espelhos_Thor.Models.Pedido
+<input type="hidden" name="statuspcp" id="statuspcp" value="" />
+<input type="hidden" name="serrariapcp" id="serrariapcp" value="" />
+<input type="hidden" name="obspcp" id="obspcp" value="" />
+
+    <table class="table table-responsive table-hover table-striped table-overflow">
+
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>Numero</th>
+                <th>Data
+                    <select name="DataPedido" id="DataPedido" onchange="MudaAction(frmBrw, '/Pedido/FiltrarPcp');">
+                        @foreach (var n in ViewBag.lstDtPedido)
+                        {
+                            string selected =(n == Model.DataPedido ? "selected" : "");
+                            string dtpedido = n;
+                            if (n != "TODAS")
+                            {
+                                dtpedido = (dtpedido == " " ? dtpedido : n.Substring(6, 2) + "/" + n.Substring(4, 2) + "/" + n.Substring(0, 4));
+                            }
+
+                            <option value="@n" @selected>@dtpedido</option>
+                        }
+                    </select>
+                </th>
+                <th>
+                    Cliente
+                    <select name="Cliente" id="Cliente" onchange="MudaAction(frmBrw, '/Pedido/FiltrarPcp');">
+                        @foreach (var n in ViewBag.lstCli)
+                        {
+                            string selected = (n == Model.Cliente ? "selected" : "");
+
+                            <option value="@n" @selected>@n</option>
+                        }
+                    </select>
+                    </th>
+                <th>
+                    Destino
+                    <select name="Destino" id="Destino" onchange="MudaAction(frmBrw, '/Pedido/FiltrarPcp');">
+                        @foreach (var n in ViewBag.lstDestino)
+                        {
+                            string selected = (n == Model.Destino ? "selected" : "");
+
+                            <option value="@n" @selected>@n</option>
+                        }
+                    </select>
+                </th>
+                <th>
+                    PO
+                    <select name="PO" id="PO" onchange="MudaAction(frmBrw, '/Pedido/FiltrarPcp');">
+                        @foreach (var n in ViewBag.lstPO)
+                        {
+                            string selected = (n == Model.PO ? "selected" : "");
+
+                            <option value="@n" @selected>@n</option>
+                        }
+                    </select>
+                </th>
+                <th>
+                    Material
+                    <select name="Material" id="Material" onchange="MudaAction(frmBrw, '/Pedido/FiltrarPcp');">
+                        @foreach (var n in ViewBag.lstmat)
+                        {
+                            string selected = (n == Model.Material ? "selected" : "");
+
+                            <option value="@n" @selected>@n</option>
+                        }
+                    </select>
+                </th>
+                <th>
+                    Class.
+                    <select name="Classificacao" id="Classificacao" onchange="MudaAction(frmBrw, '/Pedido/FiltrarPcp');">
+                        @foreach (var n in ViewBag.lstClass)
+                        {
+                            string selected = (n == Model.Classificacao ? "selected" : "");
+
+                            <option value="@n" @selected>@n</option>
+                        }
+                    </select>
+                </th>
+                <th>
+                    Acab
+                    <select name="TipoAcab" id="TipoAcab" onchange="MudaAction(frmBrw, '/Pedido/FiltrarPcp');">
+                        @foreach (var n in ViewBag.lstAcab)
+                        {
+                            string selected = (n == Model.TipoAcab ? "selected" : "");
+
+                            <option value="@n" @selected>@n</option>
+                        }
+                    </select>
+                </th>
+                <th>
+                    Espessura
+                    <select name="Espessura" id="Espessura" onchange="MudaAction(frmBrw, '/Pedido/FiltrarPcp');">
+                        @foreach (var n in ViewBag.lstEspessura)
+                        {
+                            string selected = (n == Model.Espessura ? "selected" : "");
+
+                            <option value="@n" @selected>@n</option>
+                        }
+                    </select>
+                </th>
+                <th align="right">
+                    Dt.Prev.Embarque
+                    <select name="DataPrevEmb" id="DataPrevEmb" onchange="MudaAction(frmBrw, '/Pedido/FiltrarPcp');">
+                        @foreach (var n in ViewBag.lstDtPrevEmb)
+                        {
+                            string selected = (n == Model.DataPrevEmb ? "selected" : "");
+                            string dtprevemb = n;
+                            if (n != "TODAS")
+                            {
+                               
+                                dtprevemb =(n==" " ? " ": n.Substring(6, 2) + "/" + n.Substring(4, 2) + "/" + n.Substring(0, 4));
+                            }
+
+                            <option value="@n" @selected>@dtprevemb</option>
+                        }
+                    </select>
+                </th>
+                <th align="right">Lead Time</th>
+                <th align="right">
+                    Quantidade
+                    <select name="Quantidade" id="Quantidade" onchange="MudaAction(frmBrw, '/Pedido/FiltrarPcp');">
+                        @foreach (var n in ViewBag.lstQuantidade)
+                        {
+                            string selected = "";
+                            if (n != 99999)
+                            {
+                                selected = (n == Model.Quantidade ? "selected" : "");
+                                <option value="@n" @selected>@n</option>
+                            }
+                            else
+                            {
+                                selected = (n == Model.Quantidade ? "selected" : "");
+                                <option value="@n" @selected>TODAS</option>
+
+                            }
+                        }
+                    </select>
+                </th>
+                <th align="right">
+                    Saldo
+                    <select name="Saldo" id="Saldo" onchange="MudaAction(frmBrw, '/Pedido/FiltrarPcp');">
+                        @foreach (var n in ViewBag.lstSaldo)
+                        {
+                            string selected = "";
+                            if (n != 99999)
+                            {
+                                selected = (n == Model.Saldo ? "selected" : "");
+                                <option value="@n" @selected>@n</option>
+                            }
+                            else
+                            {
+                                selected = (n == Model.Saldo ? "selected" : "");
+                                <option value="@n" @selected>TODOS</option>
+
+                            }
+                        }
+                    </select>
+                </th>
+                <th align="right">
+                    Preço $
+                    <select name="Preco" id="Preco" onchange="MudaAction(frmBrw, '/Pedido/FiltrarPcp');">
+                        @foreach (var n in ViewBag.lstPreco)
+                        {
+                            string selected = "";
+                            if (n != 99999)
+                            {
+                                selected = (n == Model.Preco ? "selected" : "");
+                                <option value="@n" @selected>@n</option>
+                            }
+                            else
+                            {
+                                selected = (n == Model.Preco ? "selected" : "");
+                                <option value="@n" @selected>TODOS</option>
+
+                            }
+                        }
+                    </select>
+               </th>
+                <th>
+                    Vendedor
+                    <select name="Vendedor" id="Vendedor" onchange="MudaAction(frmBrw, '/Pedido/FiltrarPcp');">
+                        @foreach (var n in ViewBag.lstVendedor)
+                        {
+                            string selected = (n == Model.Vendedor ? "selected" : "");
+
+                            <option value="@n" @selected>@n</option>
+                        }
+                    </select>
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{
+                var nIndex = 0;
+                var sChecked = "";
+                var sTrOnclick = "";
+                var sDataPrev = "";
+                string sDataPrevEmb = "";
+                string sDataPrevEmbOri = "";
+                DateTime datanow = DateTime.Now;
+                DateTime dataPrev = new DateTime();
+                TimeSpan timespan;
+                foreach (var ped in ViewBag.pedidos)
+                {
+                    sChecked = (nIndex == 0 ? "checked" : "");
+                    sTrOnclick = "frmBrw.ID[" + nIndex + "].checked=true; document.getElementById('IDSelect').value = " + nIndex + " ;";
+                    if (ped.DataPrevEmb.Trim() != "")
+                    {
+                        sDataPrev = ped.DataPrevEmb.Substring(6, 2) + "/" + ped.DataPrevEmb.Substring(4, 2) + "/" + ped.DataPrevEmb.Substring(0, 4);
+                        dataPrev = Convert.ToDateTime(sDataPrev);
+                        timespan = dataPrev - datanow;
+                    }
+                    else
+                    {
+                        timespan = datanow - datanow;
+                    }
+
+                    if (ped.DataPedido != " ")
+                    {
+                        ped.DataPedido = ped.DataPedido.Substring(6, 2) + "/" + ped.DataPedido.Substring(4, 2) + "/" + ped.DataPedido.Substring(0, 4);
+                    }
+                    if (ped.DataOvacao != " ")
+                    {
+                        ped.DataOvacao = ped.DataOvacao.Substring(6, 2) + "/" + ped.DataOvacao.Substring(4, 2) + "/" + ped.DataOvacao.Substring(0, 4);
+                    }
+
+                    if (ped.DataPrevEmb != " ")
+                    {
+                        sDataPrevEmb = ped.DataPrevEmb;
+                        ped.DataPrevEmb = ped.DataPrevEmb.Substring(6, 2) + "/" + ped.DataPrevEmb.Substring(4, 2) + "/" + ped.DataPrevEmb.Substring(0, 4);
+                    }
+                    if (ped.DataPrevEmbOri != " ")
+                    {
+                        sDataPrevEmbOri = ped.DataPrevEmbOri;
+                        ped.DataPrevEmbOri = ped.DataPrevEmbOri.Substring(6, 2) + "/" + ped.DataPrevEmbOri.Substring(4, 2) + "/" + ped.DataPrevEmbOri.Substring(0, 4);
+                    }
+
+
+                    <tr onclick="@sTrOnclick">
+                        <td>
+                            @if (ped.Status == "0")
+                            {
+                                <img src="~/Content/img/Legendas/Azul.png" height="18" width="18">}
+                            @if (ped.Status == "1")
+                            {
+                                <img src="~/Content/img/Legendas/Laranja.png" height="18" width="18" />
+                            }
+                            @if (ped.Status == "2")
+                            {
+                                <img src="~/Content/img/Legendas/Rosa.png" height="18" width="18" />
+                            }
+                            @if (ped.Status == "3")
+                            {
+                                <img src="~/Content/img/Legendas/Cinza.png" height="18" width="18" />
+                            }
+                            @if (ped.Status == "4")
+                            {
+                                <img src="~/Content/img/Legendas/Amarelo.png" height="18" width="18" />
+                            }
+                            @if (ped.Status == "5")
+                            {
+                                <img src="~/Content/img/Legendas/verde.png" height="18" width="18" />
+                            }
+                            @if (ped.Status == "6")
+                            {
+                                <img src="~/Content/img/Legendas/vermelho.png" height="18" width="18" />
+                            }
+                            @if (ped.Status == "7")
+                            {
+                                <img src="~/Content/img/Legendas/Meio.png" height="18" width="18" />
+                            }
+                        </td>
+                        <td>
+                            <input @sChecked type='radio' id="ID" name='ID' value='@ped.Id' onchange="ShowModalPCP(@nIndex);" />
+                        </td>
+                        <td>@ped.NumeroThor</td>
+                        <td>@ped.DataPedido</td>
+                        <td>@ped.Cliente</td>
+                        <td>@ped.Destino</td>
+                        <td>@ped.PO</td>
+                        <td>@ped.Material</td>
+                        <td>@ped.Classificacao</td>
+                        <td>@ped.TipoAcab</td>
+                        <td>@ped.Espessura</td>
+                        <td align="right">@ped.DataPrevEmb</td>
+
+                        @if (timespan.Days < 0)
+                        {
+                            <td><label class="text text-danger">@timespan.Days</label></td>
+                        }
+                        else
+                        {
+                            <td><label class="text text-primary">@timespan.Days</label></td>
+                        }
+                        <td align="right">@ped.Quantidade</td>
+                        <td align="right">@ped.Saldo</td>
+                        <td align="right">@ped.Preco.ToString("####,###.00")</td>
+                        <td>@ped.Vendedor</td>
+                    </tr>
+
+                    string material = "ObsMaterial" + nIndex.ToString().Trim();
+                    string status = "Status" + nIndex.ToString().Trim();
+                    string serraria = "Serraria" + nIndex.ToString().Trim();
+                    string saldo = "Saldo" + nIndex.ToString().Trim();
+                    string dtenvioaprovacao = "DtEnvioAprovacao" + nIndex.ToString().Trim();
+                    string sDtEnviAprovacao = "";
+                    string dtprevemb = "DataPrevEmb" + nIndex.ToString().Trim();
+                    string dtprevembori = "DataPrevEmbOri" + nIndex.ToString().Trim();
+                    string justifi = "Justificativa" + nIndex.ToString().Trim();
+                    string numctn = "NumCtn" + nIndex.ToString().Trim();
+                    string acabamento = "acabamento" + nIndex.ToString().Trim();
+
+                    if (ped.DtEnvCtnAprovacao.Trim() != "")
+                    {
+                        sDtEnviAprovacao = ped.DtEnvCtnAprovacao.Insert(4, "-");
+                        sDtEnviAprovacao = sDtEnviAprovacao.Insert(7, "-");
+                    }
+
+                    if (sDataPrevEmb != "")
+                    {
+                        sDataPrevEmb = sDataPrevEmb.Insert(4, "-");
+                        sDataPrevEmb = sDataPrevEmb.Insert(7, "-");
+                    }
+
+                    if (sDataPrevEmbOri != "")
+                    {
+                        sDataPrevEmbOri = sDataPrevEmbOri.Insert(4, "-");
+                        sDataPrevEmbOri = sDataPrevEmbOri.Insert(7, "-");
+                    }
+
+                    <input type="hidden" name="@material" id="@material" value="@ped.ObsMaterial" />
+                    <input type="hidden" name="@serraria" id="@serraria" value="@ped.Serraria" />
+                    <input type="hidden" name="@status" id="@status" value="@ped.Status" />
+                    <input type="hidden" name="@saldo" id="@saldo" value="@ped.Saldo" />
+                    <input type="hidden" name="@dtenvioaprovacao" id="@dtenvioaprovacao" value="@sDtEnviAprovacao" />
+                    <input type="hidden" name="@numctn" id="@numctn" value="@ped.NumCtnEngs" />
+                    <input type="hidden" name="@dtprevemb" id="@dtprevemb" value="@sDataPrevEmb" />
+                    <input type="hidden" name="@dtprevembori" id="@dtprevembori" value="@sDataPrevEmbOri" />
+                    <input type="hidden" name="@acabamento" id="@acabamento" value="@ped.TipoAcab" />
+                    <input type="hidden" name="@justifi" id="@justifi" value="@ped.Justificativa" />
+                    nIndex++;
+                }
+            }
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" align="right">
+                    <right>
+                        <button type="submit" class="btn btn-primary" onclick="MudaAction(frmBrw, '/Pedido/AjustePcp');">Confirmar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </right>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="Recno" name="Recno" value="0" />
+                    <input type="hidden" id="IDSelect" name="IDSelect" value="0" />
+                    <input type="hidden" id="cliente_filtro" name="cliente_filtro" value="@Model.Cliente" />
+                    <input type="hidden" id="material_filtro" name="material_filtro" value="@Model.Material" />
+                    <input type="hidden" id="espessura_filtro" name="espessura_filtro" value="@Model.Espessura" />
+                    <table class="table-form">
+                        <tr>
+                            <td>@Html.LabelFor(p => p.Status, "Status: ")</td>
+                            <td>@Html.DropDownListFor(p => p.Status, new SelectList(ViewBag.Status, "Codigo", "Descricao"), new { @class = "form-control text-uppercase", onchange = "ShowQtdAtend(this.value);" })</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(p => p.Serraria, "Serraria: ")</td>
+                            <td>@Html.DropDownListFor(p => p.Serraria, new SelectList(ViewBag.empresa, "Codigo", "Nome"), new { @class = "form-control text-uppercase" })</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(p => p.TipoAcab, "Acab: ")</td>
+                            <td>@Html.TextBoxFor(p => p.TipoAcab, new { @class = "form-control text-uppercase" })</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(p => p.DtEnvCtnAprovacao, "Dt.Envio p/Aprov: ")</td>
+                            <td><input type="date" class="form-control" id="hDtEnvCtnAprovacao" name="DtEnvCtnAprovacao" value=""</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(p => p.ObsMaterial, "Observação: ")</td>
+                            <td>@Html.TextAreaFor(p => p.ObsMaterial, new { @class = "form-control text-uppercase", @cols = "50", @rows = "5" })</td>
+                        </tr>
+                        <tr>
+                            <td><label id="hNumCtn1">Num.CTN:</label></td>
+                            <td>
+                                <input class="text-uppercase" type="text" id="hNumCtn2" name="NumCtnEngs" value="" onfocus="this.select();"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label id="QtdAtend1">Quantidade:</label></td>
+                            <td>
+                                <input class="text-uppercase" type="number" required step="1" name="qtdAtend" id="QtdAtend2" value="@Html.ValueFor(p => p.Saldo)" onfocus="this.select();" onblur="VldQuant(this);" />
+                                <label id="msgErro" class="alert-danger">Quantidade inválida!</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label id="SldAtend1">Saldo:</label></td>
+                            <td><input class="text-uppercase" type="number" step="1" name="sldAtend" id="SldAtend2" value="@Html.ValueFor(p => p.Saldo)" onfocus="this.select();" readonly="readonly" /></td>
+                        </tr>
+                        <tr>
+                            <td><label id="hDtPrevEmb1">Dt.Prev.Proximo Embarque:</label></td>
+                            <td><input class="text-uppercase" type="date" step="1" name="DataPrevEmb" id="hDtPrevEmb2" value="@Html.ValueFor(p => p.DataPrevEmb)" onfocus="this.select();" onchange="ShowJustificativa();"/></td>
+                            <input type="hidden" name="dtprevembori" id="dtprevembori" value="" />
+                        </tr>
+                        <tr>
+                            <td><label id="hJustif1">Justificativa alteração de embarque:</label></td>
+                            <td><div id="hJustif2"><textarea class="form-control text-uppercase" cols="50" rows="5" id="Justificativa" name="Justificativa" required onfocus="this.select();"></textarea></div></td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <center><h4 class="modal-title" id="exampleModalLabel"><strong>Consulta Embarcados</strong></h4></center>
+                </div>
+                <center>
+                    <div class="modal-body">
+                        <label>Data de : </label><br /><input type="date" name="De" required="required" class="form-control text-uppercase"><br />
+                        <label>Data ate: </label><br /><input type="date" onblur="checarDatas();" name="Ate" required="required" class="form-control text-uppercase">
+                    </div>
+                </center>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" onsubmit="checarDatas();" onclick="MudaAction(frmBrw, '/Pedido/ConsultaEmabarcado');" class="btn btn-success">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.getElementById("QtdAtend1").hidden = true;
+        document.getElementById("QtdAtend2").hidden = true;
+        document.getElementById("SldAtend1").hidden = true;
+        document.getElementById("SldAtend2").hidden = true;
+        document.getElementById("hNumCtn1").hidden = true;
+        document.getElementById("hNumCtn2").hidden = true;
+        document.getElementById("hJustif1").hidden = true;
+        document.getElementById("hJustif2").hidden = true;
+        document.getElementById("msgErro").hidden = true;
+    </script>
